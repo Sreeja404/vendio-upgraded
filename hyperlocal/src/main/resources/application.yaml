@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: hyperlocal
+  datasource:
+    url: jdbc:mysql://localhost:3306/vendio_upgraded?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+    username: root
+    password: sreeja
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
