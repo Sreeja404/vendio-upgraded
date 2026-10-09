@@ -16,7 +16,27 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: hyperlocal      # all run: steps execute here
+        working-directory: hyperlocal  # all run: steps execute here
+
+ services:
+      mysql:
+        image: mysql:8
+        env:
+          MYSQL_DATABASE: testdb
+          MYSQL_ROOT_PASSWORD: root
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd "mysqladmin ping -h 127.0.0.1 -proot"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 10
+
+    env:
+      SPRING_DATASOURCE_URL: jdbc:mysql://127.0.0.1:3306/vendio_upgraded
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: sreeja
+      SPRING_JPA_HIBERNATE_DDL_AUTO: create-drop
 
     steps:
       - uses: actions/checkout@v4
